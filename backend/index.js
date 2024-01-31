@@ -14,7 +14,8 @@ dotenv.config();
 
 
 app.use(cors({
-    origin: 'http://localhost:3000',
+    origin: ['https://deploy'],
+    methods:["POST","GET"],
     credentials: true
 }));
 app.use((req, res, next) => {
@@ -34,6 +35,9 @@ app.use('/userroute',verifyToken,userRoute);
 
 
 app.use('/protected', protectedRoutes);
+app.get("/",(req,res)=>{
+    res.json("HELLO")
+})
 
 
 
