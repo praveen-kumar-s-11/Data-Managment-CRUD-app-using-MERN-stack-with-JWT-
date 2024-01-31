@@ -18,6 +18,10 @@ app.use(cors({
     methods:["POST","GET"],
     credentials: true
 }));
+
+app.use(express.json());
+app.use(cookieParser());
+
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
@@ -27,20 +31,15 @@ app.use((req, res, next) => {
 });
 
 
-app.use(express.json());
-app.use(cookieParser());
+
 
 app.use('/auth', authRoutes);
 app.use('/userroute',verifyToken,userRoute);    
-
-
 app.use('/protected', protectedRoutes);
+
 app.get("/",(req,res)=>{
     res.json("HELLO")
 })
-
-
-
 
 const connect=async() =>{
     try{
